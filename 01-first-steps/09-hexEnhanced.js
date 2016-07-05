@@ -1,4 +1,5 @@
 function getRGBEnhanced(color){
+	color = color.toUpperCase();
 	hex = color.split('');
 
 	red = parseInt(hex[1]+hex[2], 16);
