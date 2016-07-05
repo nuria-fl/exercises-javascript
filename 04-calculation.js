@@ -7,7 +7,6 @@ function calculation(){
 		}
 	}
 	var arr = str.split(' ');
-	console.log(arr);
 	for(i=0;i<arr.length-1;i++){
 		var num = arr[i];
 		sum += parseInt(num);
