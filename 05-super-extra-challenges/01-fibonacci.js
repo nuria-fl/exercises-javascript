@@ -8,3 +8,11 @@ function fibonacci(n){
 	
 	return seq[n];
 }
+
+function recursive(n){
+	if(n<=2){
+		return 1;
+	} else {
+		return recursive(n-1) + recursive(n-2);
+	}
+}
