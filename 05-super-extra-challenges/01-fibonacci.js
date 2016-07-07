@@ -10,9 +10,14 @@ function fibonacci(n){
 }
 
 function recursive(n){
-	if(n<=2){
-		return 1;
+	if(n>1)	{
+		return	fibonacci(n-1) + fibonacci(n-2);
 	} else {
-		return recursive(n-1) + recursive(n-2);
+		return n;
 	}
+}
+
+function fibonacciSuperAwesome(n) {
+	if( n>1 ) return (fibonacci(n-1) + fibonacci(n-2));
+ 	else return (n===1) ? 0 : 1;
 }
