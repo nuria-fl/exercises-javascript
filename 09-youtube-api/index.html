@@ -18,8 +18,11 @@
 		.done(function( data ) {
 			var video = data.data.items[0];
 			$('h1').text(video.title);
-			$('a').attr('href',video.player.default);
-			$('img').attr('src', video.thumbnail.hqDefault).attr('alt', video.title)
+			$('a').attr('href','https://www.youtube.com/watch?v='+video.id);
+			$('img').attr({
+				'src': video.thumbnail.hqDefault,
+				'alt': video.title
+			})
 		})
 	</script>
 </body>
