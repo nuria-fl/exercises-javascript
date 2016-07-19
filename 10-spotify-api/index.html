@@ -4,6 +4,11 @@
 	<meta charset="UTF-8">
 	<title>Spotify</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<style>
+		.img-thumbnail {
+			margin-right: 10px;
+		}
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -16,7 +21,7 @@
 			<button class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>	
 		</form>
 		
-		<ul>
+		<ul class="list-group">
 			
 		</ul>
 	</div>
@@ -29,15 +34,20 @@
 				url: 'https://api.spotify.com/v1/search?q='+searchTerm+'&type=artist',
 			})
 			.done(function( artists ) {
-				var list = ''
+				var list = '';
+				
 				artists.artists.items.forEach(function(elem, i){
-					list += '<li><a href="#" class="js-artist" data-id="'+elem.id+'">'+ elem.name +'</a></li>'
+					var artistPic = '';
+					if(elem.images[2]) {
+						artistPic = '<img src="'+ elem.images[2].url +'" alt="'+ elem.name +'" class="img-thumbnail" width="80">';
+					}
+					list += '<li class="list-group-item"><a href="#" class="js-artist" data-id="'+elem.id+'">'+ artistPic+ elem.name +'</a></li>'
 				})
 				$('ul').html(list)
 			})
 		})
 		$('ul').on('click', '.js-artist', function(e){
-			e.preventDefault;
+			e.preventDefault();
 			
 			$(this).next('ul').remove();
 			var artistId = $(this).data('id');
@@ -47,16 +57,20 @@
 				url: 'https://api.spotify.com/v1/artists/' + artistId + '/albums',
 			})
 			.done(function( albums ) {
-				var albumsList = '<ul>'
+				var albumsList = '<ul class="list-group">'
 				albums.items.forEach(function(elem, i){
-					albumsList += '<li><a href="#" class="js-album" data-id="'+elem.id+'">'+ elem.name +'</a></li>'
+					var albumPic = '';
+					if(elem.images[2]) {
+						albumPic = '<img src="'+ elem.images[2].url +'" alt="'+ elem.name +'" class="img-thumbnail" width="80">';
+					}
+					albumsList += '<li class="list-group-item"><a href="#" class="js-album media" data-id="'+elem.id+'">' + albumPic + elem.name +'</a></li>'
 				})
 				albumsList += '</ul>';
 				$(parentLi).append(albumsList)
 			})
 		})
 		$('ul').on('click', '.js-album', function(e){
-			e.preventDefault;
+			e.preventDefault();
 
 			$(this).next('ul').remove();
 
@@ -66,9 +80,9 @@
 				url: 'https://api.spotify.com/v1/albums/' + albumId + '/tracks',
 			})
 			.done(function( tracks ) {
-				var tracksList = '<ul>'
+				var tracksList = '<ul class="list-group">'
 				tracks.items.forEach(function(elem, i){
-					tracksList += '<li><a href="'+elem.preview_url+'" class="js-track" target="_blank">'+ elem.name +'</a></li>'
+					tracksList += '<li class="list-group-item"><a href="'+elem.preview_url+'" class="js-track" target="_blank"><i class="glyphicon glyphicon-music"></i> '+ elem.name +'</a></li>'
 				})
 				tracksList += '</ul>';
 				$(parentLi).append(tracksList)
