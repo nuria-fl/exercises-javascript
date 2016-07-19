@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Spotify</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h1>Spotify API</h1>
+		<form action="#" class="form-inline">
+			<div class="form-group">
+				<label for="search">Search for an artist:</label>
+				<input type="search" id="search" class="form-control" required>
+			</div>
+			<button class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>	
+		</form>
+		
+		<ul>
+			
+		</ul>
+	</div>
+	<script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script>
+		$('form').submit(function(){
+
+			var searchTerm = $(this).find('input').val();
+			$.ajax({
+				url: 'https://api.spotify.com/v1/search?q='+searchTerm+'&type=artist',
+			})
+			.done(function( artists ) {
+				var list = ''
+				artists.artists.items.forEach(function(elem, i){
+					list += '<li><a href="#" class="js-artist" data-id="'+elem.id+'">'+ elem.name +'</a></li>'
+				})
+				$('ul').html(list)
+			})
+		})
+		$('ul').on('click', '.js-artist', function(e){
+			e.preventDefault;
+			
+			$(this).next('ul').remove();
+			var artistId = $(this).data('id');
+			var parentLi = $(this).parent();
+
+			$.ajax({
+				url: 'https://api.spotify.com/v1/artists/' + artistId + '/albums',
+			})
+			.done(function( albums ) {
+				var albumsList = '<ul>'
+				albums.items.forEach(function(elem, i){
+					albumsList += '<li><a href="#" class="js-album" data-id="'+elem.id+'">'+ elem.name +'</a></li>'
+				})
+				albumsList += '</ul>';
+				$(parentLi).append(albumsList)
+			})
+		})
+		$('ul').on('click', '.js-album', function(e){
+			e.preventDefault;
+
+			$(this).next('ul').remove();
+
+			var albumId = $(this).data('id');
+			var parentLi = $(this).parent();
+			$.ajax({
+				url: 'https://api.spotify.com/v1/albums/' + albumId + '/tracks',
+			})
+			.done(function( tracks ) {
+				var tracksList = '<ul>'
+				tracks.items.forEach(function(elem, i){
+					tracksList += '<li><a href="'+elem.preview_url+'" class="js-track" target="_blank">'+ elem.name +'</a></li>'
+				})
+				tracksList += '</ul>';
+				$(parentLi).append(tracksList)
+			})
+		})
+	</script>
+</body>
+</html>
