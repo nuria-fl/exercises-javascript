@@ -60,6 +60,7 @@ function getUser(){
 
 getUser();
 
-$('.get-profile').click(function(){
+$('.get-profile').click(function(event){
+	event.preventDefault();
 	getUser();	
 })
