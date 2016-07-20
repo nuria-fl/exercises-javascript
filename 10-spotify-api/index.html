@@ -29,68 +29,12 @@
 		</ul>
 	</div>
 	<script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
-	<script>
-		$('form').submit(function(){
-
-			var searchTerm = $(this).find('input').val();
-			$.ajax({
-				url: 'https://api.spotify.com/v1/search?q='+searchTerm+'&type=artist',
-			})
-			.done(function( artists ) {
-				var list = '';
-				
-				artists.artists.items.forEach(function(elem, i){
-					var artistPic = '';
-					if(elem.images[2]) {
-						artistPic = '<img src="'+ elem.images[2].url +'" alt="'+ elem.name +'" class="img-thumbnail" width="80">';
-					}
-					list += '<li class="list-group-item"><a href="#" class="js-artist" data-id="'+elem.id+'">'+ artistPic+ elem.name +'</a></li>'
-				})
-				$('ul').html(list)
-			})
-		})
-		$('ul').on('click', '.js-artist', function(e){
-			e.preventDefault();
-			
-			$(this).next('ul').remove();
-			var artistId = $(this).data('id');
-			var parentLi = $(this).parent();
-
-			$.ajax({
-				url: 'https://api.spotify.com/v1/artists/' + artistId + '/albums?market=ES',
-			})
-			.done(function( albums ) {
-				var albumsList = '<ul class="list-group">'
-				albums.items.forEach(function(elem, i){
-					var albumPic = '';
-					if(elem.images[2]) {
-						albumPic = '<img src="'+ elem.images[2].url +'" alt="'+ elem.name +'" class="img-thumbnail" width="80">';
-					}
-					albumsList += '<li class="list-group-item"><a href="#" class="js-album media" data-id="'+elem.id+'">' + albumPic + elem.name +'</a></li>'
-				})
-				albumsList += '</ul>';
-				$(parentLi).append(albumsList)
-			})
-		})
-		$('ul').on('click', '.js-album', function(e){
-			e.preventDefault();
-
-			$(this).next('ul').remove();
-
-			var albumId = $(this).data('id');
-			var parentLi = $(this).parent();
-			$.ajax({
-				url: 'https://api.spotify.com/v1/albums/' + albumId + '/tracks',
-			})
-			.done(function( tracks ) {
-				var tracksList = '<ul class="list-group">'
-				tracks.items.forEach(function(elem, i){
-					tracksList += '<li class="list-group-item"><a href="'+elem.preview_url+'" class="js-track" target="_blank"><i class="glyphicon glyphicon-music"></i> '+ elem.name +'</a></li>'
-				})
-				tracksList += '</ul>';
-				$(parentLi).append(tracksList)
-			})
-		})
-	</script>
+	<script src="js/search.js"></script>
+	<script src="js/getArtists.js"></script>
+	<script src="js/albums.js"></script>
+	<script src="js/getAlbums.js"></script>
+	<script src="js/tracks.js"></script>
+	<script src="js/getTracks.js"></script>
+	
 </body>
 </html>
