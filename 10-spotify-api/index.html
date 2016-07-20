@@ -8,12 +8,15 @@
 		.img-thumbnail {
 			margin-right: 10px;
 		}
+		.list-group .list-group {
+			margin-top: 10px;
+		}
 	</style>
 </head>
 <body>
 	<div class="container">
 		<h1>Spotify API</h1>
-		<form action="#" class="form-inline">
+		<form action="#" class="form-inline well">
 			<div class="form-group">
 				<label for="search">Search for an artist:</label>
 				<input type="search" id="search" class="form-control" required>
@@ -54,7 +57,7 @@
 			var parentLi = $(this).parent();
 
 			$.ajax({
-				url: 'https://api.spotify.com/v1/artists/' + artistId + '/albums',
+				url: 'https://api.spotify.com/v1/artists/' + artistId + '/albums?market=ES',
 			})
 			.done(function( albums ) {
 				var albumsList = '<ul class="list-group">'
