@@ -34,4 +34,4 @@
 		var albumId = $(this).data('id');
 		$( document ).trigger( "searchDataTracksReady", albumId );
 	})
-})(jQuery)
+})(jQuery);

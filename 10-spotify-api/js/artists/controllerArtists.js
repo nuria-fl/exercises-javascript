@@ -33,4 +33,4 @@
 		$( document ).trigger( "searchDataAlbumsReady", artistId );
 	})
 	
-})(jQuery)
+})(jQuery);

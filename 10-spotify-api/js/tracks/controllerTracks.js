@@ -17,8 +17,6 @@
 
 
 	$(document).on('dataTracksReady', function(event, tracks, albumId) {
-		
-		console.log(tracks);
 
 		var htmlBlock = createBlockTracks ( tracks.items );
 
@@ -27,4 +25,4 @@
 
 	})
 	
-})(jQuery)
+})(jQuery);

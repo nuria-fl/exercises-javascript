@@ -6,4 +6,4 @@
 		$( document ).trigger( "searchDataArtistReady", searchTerm );
 
 	});	
-})(jQuery)
+})(jQuery);

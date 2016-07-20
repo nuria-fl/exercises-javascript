@@ -11,4 +11,4 @@
 			$(document).trigger("dataArtistsReady", artists);
 		})
 	});
-})(jQuery)
+})(jQuery);
