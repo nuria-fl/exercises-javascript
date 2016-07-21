@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Clock timezone</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+	<link rel="stylesheet" href="dist/styles.css">
+</head>
+<body>
+	<div class="container text-center">
+		<h1 id="date">
+			<span></span><span></span><span></span>
+		</h1>
+		<h2 id="timezoneTitle"></h2>
+		<h3>Convert to timezone:</h3>
+		<i id="loading" class="glyphicon glyphicon-refresh"></i>
+		<select name="timezones" id="timezones" hidden></select>	
+	</div>
+	
+	<script src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="dist/scripts.min.js"></script>
+</body>
+</html>
