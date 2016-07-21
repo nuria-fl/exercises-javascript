@@ -6,7 +6,11 @@
 		transform: rotate(360deg);
 	}
 }
+h1, h2, h3 {
+	font-weight: 400;
+}
 h1 {
+	font-size: 16vw;
 	span {
 		&:after {
 			content: ':';
@@ -15,6 +19,13 @@ h1 {
 			content: '';
 		}
 	}	
+}
+h2 {
+	font-size: 6vw;
+	margin-bottom: 5vh;
+}
+h3 {
+	font-size: 4vw;
 }
 .glyphicon-refresh {
 	animation: loading 1s infinite linear;
