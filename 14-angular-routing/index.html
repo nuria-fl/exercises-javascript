@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Routes angular demo</title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+</head>
+<body>
+	
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+		    <div class="navbar-header">
+		    	<a class="navbar-brand" href="#/">My Application</a>
+		    </div>
+	    	<ul class="nav navbar-nav">
+	        	<li ng-class="activePage==='home' ? 'active' : ''"><a href="#/">Home</a></li>
+	        	<li ng-class="activePage==='about' ? 'active' : ''"><a href="#/about">About</a></li>
+	        	<li ng-class="activePage==='contact' ? 'active' : ''"><a href="#/contact">Contact</a></li>
+	        	<li ng-class="activePage==='clients' ? 'active' : ''"><a href="#/clients">Clients</a></li>
+	      	</ul>
+		</div>
+	</nav>
+	<div class="container">
+		<div ng-view></div>
+	</div>
+
+
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular.js'></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular-route.js'></script>
+
+	<script src="js/app.js"></script>
+	<script src="js/controllers.js"></script>
+	<script src="js/config.js"></script>
+
+</body>
+</html>
