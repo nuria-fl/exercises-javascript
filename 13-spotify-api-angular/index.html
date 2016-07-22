@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mySpotifyApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Spotify Angular</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<style>
+		.img-thumbnail {
+			margin-right: 10px;
+		}
+		.list-group .list-group {
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container" ng-controller="searchBox">
+		<h1>Spotify API</h1>
+		<form class="form-inline well" ng-submit="submit()" >
+			<div class="form-group">
+				<label for="search">Search for an artist:</label>
+				<input type="search" id="search" class="form-control" required ng-model="searchValue">
+			</div>
+			<button class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>	
+		</form>
+		
+		<div class="form-group" ng-show="artists">
+			<select class="form-control" ng-change="getAlbums()" ng-model="selectArtists">
+				<option value="">Select artist…</option>
+				<option value="{{ artist.id }}" ng-repeat="artist in artists">
+					{{ artist.name }}
+				</option>
+			</select>
+		</div>
+
+		<div class="form-group" ng-show="albums">
+			<select class="form-control" ng-change="getTracks()" ng-model="selectAlbums">
+			<option value="">Select album…</option>
+			<option value="{{ album.id }}" ng-repeat="album in albums">
+				{{ album.name }}
+			</option>
+			</select>
+		</div>
+		
+		<div class="form-group" ng-show="tracks">
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="track in tracks">
+					<a href="{{track.preview_url}}" target="_blank"><i class="glyphicon glyphicon-music"></i> {{track.name}}</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<script>
+		angular.module("mySpotifyApp",[])
+			.controller("searchBox", function($scope, $http) {
+				var urlApi = 'https://api.spotify.com/v1/search?type=artist&query='
+				$scope.artists = "";
+				$scope.albums = "";
+				$scope.albums = "";
+				$scope.submit = function() {
+					var url  = urlApi + $scope.searchValue
+					$http.get(url)
+						.then(function( dataFromApi ) {
+							$scope.artists = dataFromApi.data.artists.items;
+						})
+				}
+				$scope.getAlbums = function() {
+					var url = 'https://api.spotify.com/v1/artists/' + $scope.selectArtists + '/albums?market=ES';
+					$http.get(url)
+						.then(function( dataFromApi ) {
+							$scope.albums = dataFromApi.data.items;
+						})
+				}
+				$scope.getTracks = function() {
+					var url = 'https://api.spotify.com/v1/albums/' + $scope.selectAlbums + '/tracks';
+					$http.get(url)
+						.then(function( dataFromApi ) {
+							$scope.tracks = dataFromApi.data.items;
+						})
+				}
+			})
+
+	</script>
+</body>
+</html>
