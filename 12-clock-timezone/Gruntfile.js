@@ -38,7 +38,7 @@ module.exports = function(grunt) {
 				tasks: ['sass', 'postcss:dist']
 			},
 			js: {
-			    files: 'js/scripts.js',
+			    files: 'js/*.js',
 			    tasks: ['uglify']
 			}
 		},
@@ -50,7 +50,9 @@ module.exports = function(grunt) {
 			        	'node_modules/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js',
 			        	'node_modules/bootstrap-select/js/bootstrap-select.js',
 			        	'node_modules/jstimezonedetect/dist/jstz.min.js',
-			        	'js/scripts.js'
+			        	'js/load.js',
+			        	'js/addTimezones.js',
+			        	'js/scripts.js',
 			        ]
 			    }
 		    }
