@@ -24,28 +24,33 @@
 			</div>
 			<button class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>	
 		</form>
-		<div class="form-group" ng-show="artists">
-			<select class="form-control" ng-change="getAlbums()" ng-model="selectArtists">
-				<option value="">Select artist…</option>
-				<option value="{{ artist.id }}" ng-repeat="artist in artists">
-					{{ artist.name }}
+		<div ng-controller="getAlbumsFromArtist">
+			<div class="form-group" ng-show="artists">
+				<select class="form-control" ng-change="getAlbums()" ng-model="selectArtists">
+					<option value="">Select artist…</option>
+					<option value="{{ artist.id }}" ng-repeat="artist in artists">
+						{{ artist.name }}
+					</option>
+				</select>
+			</div>
+		</div>
+		<div ng-controller="getTracksFromAlbum">
+			<div class="form-group" ng-show="albums">
+				<select class="form-control" ng-change="getTracks()" ng-model="selectAlbums">
+				<option value="">Select album…</option>
+				<option value="{{ album.id }}" ng-repeat="album in albums">
+					{{ album.name }}
 				</option>
-			</select>
-		</div>
-		<div class="form-group" ng-show="albums">
-			<select class="form-control" ng-change="getTracks()" ng-model="selectAlbums">
-			<option value="">Select album…</option>
-			<option value="{{ album.id }}" ng-repeat="album in albums">
-				{{ album.name }}
-			</option>
-			</select>
-		</div>
-		<div class="form-group" ng-show="tracks">
-			<ul class="list-group">
-				<li class="list-group-item" ng-repeat="track in tracks">
-					<a href="{{track.preview_url}}" target="_blank"><i class="glyphicon glyphicon-music"></i> {{track.name}}</a>
-				</li>
-			</ul>
+				</select>
+			</div>
+			{{selectedAlbum}}
+			<div class="form-group" ng-show="tracks">
+				<ul class="list-group">
+					<li class="list-group-item" ng-repeat="track in tracks">
+						<a href="{{track.preview_url}}" target="_blank"><i class="glyphicon glyphicon-music"></i> {{track.name}}</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 	<script src="js/app.js"></script>
