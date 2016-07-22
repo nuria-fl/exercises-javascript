@@ -24,7 +24,6 @@
 			</div>
 			<button class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>	
 		</form>
-		
 		<div class="form-group" ng-show="artists">
 			<select class="form-control" ng-change="getAlbums()" ng-model="selectArtists">
 				<option value="">Select artist…</option>
@@ -33,7 +32,6 @@
 				</option>
 			</select>
 		</div>
-
 		<div class="form-group" ng-show="albums">
 			<select class="form-control" ng-change="getTracks()" ng-model="selectAlbums">
 			<option value="">Select album…</option>
@@ -42,7 +40,6 @@
 			</option>
 			</select>
 		</div>
-		
 		<div class="form-group" ng-show="tracks">
 			<ul class="list-group">
 				<li class="list-group-item" ng-repeat="track in tracks">
@@ -51,36 +48,8 @@
 			</ul>
 		</div>
 	</div>
-	<script>
-		angular.module("mySpotifyApp",[])
-			.controller("searchBox", function($scope, $http) {
-				var urlApi = 'https://api.spotify.com/v1/search?type=artist&query='
-				$scope.artists = "";
-				$scope.albums = "";
-				$scope.albums = "";
-				$scope.submit = function() {
-					var url  = urlApi + $scope.searchValue
-					$http.get(url)
-						.then(function( dataFromApi ) {
-							$scope.artists = dataFromApi.data.artists.items;
-						})
-				}
-				$scope.getAlbums = function() {
-					var url = 'https://api.spotify.com/v1/artists/' + $scope.selectArtists + '/albums?market=ES';
-					$http.get(url)
-						.then(function( dataFromApi ) {
-							$scope.albums = dataFromApi.data.items;
-						})
-				}
-				$scope.getTracks = function() {
-					var url = 'https://api.spotify.com/v1/albums/' + $scope.selectAlbums + '/tracks';
-					$http.get(url)
-						.then(function( dataFromApi ) {
-							$scope.tracks = dataFromApi.data.items;
-						})
-				}
-			})
-
-	</script>
+	<script src="js/app.js"></script>
+	<script src="js/controller.js"></script>
+	<script src="js/service.js"></script>
 </body>
 </html>
