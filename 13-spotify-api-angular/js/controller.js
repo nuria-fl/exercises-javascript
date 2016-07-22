@@ -1,5 +1,5 @@
 angular.module("spotifyController", ["spotifyServices"])
-	.controller("searchBox", function($scope, dataArtists, dataAlbums, dataTracks) {
+	.controller("mainController", function($scope, dataArtists) {
 		$scope.artists = "";
 		$scope.albums = "";
 		$scope.tracks = "";
@@ -10,7 +10,10 @@ angular.module("spotifyController", ["spotifyServices"])
 				})
 		}
 	})
-	.controller("getAlbumsFromArtist", function($scope, dataAlbums) {
+	// .controller("artistsController", function($scope, dataArtists) {
+
+	// })
+	.controller("artistsController", function($scope, dataAlbums) {
 		$scope.getAlbums = function() {
 			dataAlbums.getAlbums($scope.selectArtists)
 				.then(function( dataFromApi ) {
@@ -18,7 +21,7 @@ angular.module("spotifyController", ["spotifyServices"])
 				})
 		}
 	})
-	.controller("getTracksFromAlbum", function($scope, dataTracks) {
+	.controller("albumsController", function($scope, dataTracks) {
 		$scope.getTracks = function() {
 			dataTracks.getTracks($scope.selectAlbums)
 				.then(function( dataFromApi ) {
@@ -28,3 +31,5 @@ angular.module("spotifyController", ["spotifyServices"])
 
 		}
 	})
+	// $rootScope.$broadcast(eventName, data)
+	// $scope.$on(eventName, function(event, data){})
